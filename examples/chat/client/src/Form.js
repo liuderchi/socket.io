@@ -14,10 +14,9 @@ class Form extends Component {
     socket.on('chat message', msg => {
       const { messages } = this.state;
       this.setState({
-        messages: [...messages, { id: 20, payload: msg }],
+        messages: [...messages, msg],
       });
     });
-    // TODO set valid id
   };
   onChange = e => {
     e.preventDefault();

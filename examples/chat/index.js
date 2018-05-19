@@ -75,8 +75,11 @@ io.on('connection', (socket) => {
     }
   });
 
-  socket.on('chat message', function(msg){
-    console.warn(`msg: ${msg}`);
-    io.emit('chat message', msg);
+  socket.on('chat message', function(inputText) {
+    console.warn(`inputText: ${inputText}`);
+    io.emit('chat message', {
+      timestamp: new Date().getTime(),
+      payload: inputText,
+    });
   });
 });
