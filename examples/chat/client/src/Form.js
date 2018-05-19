@@ -7,11 +7,11 @@ class Form extends Component {
   state = {
     messages: [],
     socket: openSocket(SERVER_API),
+    inputText: '',
   };
   subscribeChatMessage = () => {
     const { socket } = this.state;
     socket.on('chat message', msg => {
-      console.warn(`msg: ${msg}`);
       const { messages } = this.state;
       this.setState({
         messages: [...messages, { id: 20, payload: msg }],
@@ -19,28 +19,30 @@ class Form extends Component {
     });
     // TODO set valid id
   };
+  onChange = e => {
+    e.preventDefault();
+    this.setState({ inputText: e.target.value });
+  };
   onSubmit = e => {
     e.preventDefault();
-    console.warn('ON SUBMIT');
 
-    const { socket } = this.state;
-    socket.emit('chat message', 'MOCK MESSAGE');
-    // TODO get input value (jq?)
+    const { socket, inputText } = this.state;
+    socket.emit('chat message', inputText);
+    this.setState({ inputText: '' });
   };
   componentDidMount() {
-    console.warn('IN componentDidMount');
     this.subscribeChatMessage();
   }
   render() {
-    const { messages } = this.state;
-    const { onSubmit } = this;
+    const { messages, inputText } = this.state;
+    const { onSubmit, onChange } = this;
     return (
       <React.Fragment>
         <ul>
           {messages.map((message, i) => <li key={i}>{message.payload}</li>)}
         </ul>
         <form action={''} onSubmit={onSubmit}>
-          <input autoComplete="off" />
+          <input autoComplete="off" value={inputText} onChange={onChange} />
           <button>Send</button>
         </form>
       </React.Fragment>
