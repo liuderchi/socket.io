@@ -27,6 +27,7 @@ io.on('connection', (socket) => {
       username: socket.username,
       message: data
     });
+    // TODO saved to DB if needed
   });
 
   // when the client emits 'add user', this listens and executes
