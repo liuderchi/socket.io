@@ -74,4 +74,9 @@ io.on('connection', (socket) => {
       });
     }
   });
+
+  socket.on('chat message', function(msg){
+    console.warn(`msg: ${msg}`);
+    io.emit('chat message', msg);
+  });
 });
