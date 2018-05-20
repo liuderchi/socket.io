@@ -24,9 +24,12 @@ class Form extends Component {
   };
   onSubmit = e => {
     e.preventDefault();
-
+    const { user } = this.props;
     const { socket, inputText } = this.state;
-    socket.emit('chat message', inputText);
+    socket.emit('chat message', {
+      author: user,
+      payload: inputText,
+    });
     this.setState({ inputText: '' });
   };
   componentDidMount() {
@@ -38,7 +41,11 @@ class Form extends Component {
     return (
       <React.Fragment>
         <ul>
-          {messages.map((message, i) => <li key={i}>{message.payload}</li>)}
+          {messages.map((message, i) => (
+            <li key={i}>
+              {message.payload} {message.author} {Date(message.timestamp)}
+            </li>
+          ))}
         </ul>
         <form action={''} onSubmit={onSubmit}>
           <input autoComplete="off" value={inputText} onChange={onChange} />
@@ -48,5 +55,9 @@ class Form extends Component {
     );
   }
 }
+
+Form.defaultProps = {
+  user: 'derek@example.com',
+};
 
 export default Form;
