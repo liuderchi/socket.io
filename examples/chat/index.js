@@ -18,67 +18,80 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 var numUsers = 0;
 
 io.on('connection', (socket) => {
-  var addedUser = false;
+  console.log('connected');
+  ++numUsers;
+  io.emit('user count', { numUsers })
+  console.log('user count:', numUsers);
 
-  // when the client emits 'new message', this listens and executes
-  socket.on('new message', (data) => {
-    // we tell the client to execute 'new message'
-    socket.broadcast.emit('new message', {
-      username: socket.username,
-      message: data
-    });
-    // TODO saved to DB if needed
-  });
+  // var addedUser = false;
+
+  // // when the client emits 'new message', this listens and executes
+  // socket.on('new message', (data) => {
+  //   // we tell the client to execute 'new message'
+  //   socket.broadcast.emit('new message', {
+  //     username: socket.username,
+  //     message: data
+  //   });
+  //   // TODO saved to DB if needed
+  // });
 
   // when the client emits 'add user', this listens and executes
-  socket.on('add user', (username) => {
-    if (addedUser) return;
+  // socket.on('add user', (username) => {
+  //   if (addedUser) return;
+  //
+  //   // we store the username in the socket session for this client
+  //   socket.username = username;
+  //   ++numUsers;
+  //   addedUser = true;
+  //   socket.emit('login', {
+  //     numUsers: numUsers
+  //   });
+  //   // echo globally (all clients) that a person has connected
+  //   socket.broadcast.emit('user joined', {
+  //     username: socket.username,
+  //     numUsers: numUsers
+  //   });
+  // });
 
-    // we store the username in the socket session for this client
-    socket.username = username;
-    ++numUsers;
-    addedUser = true;
-    socket.emit('login', {
-      numUsers: numUsers
-    });
-    // echo globally (all clients) that a person has connected
-    socket.broadcast.emit('user joined', {
-      username: socket.username,
-      numUsers: numUsers
-    });
-  });
-
-  // when the client emits 'typing', we broadcast it to others
-  socket.on('typing', () => {
-    socket.broadcast.emit('typing', {
-      username: socket.username
-    });
-  });
-
-  // when the client emits 'stop typing', we broadcast it to others
-  socket.on('stop typing', () => {
-    socket.broadcast.emit('stop typing', {
-      username: socket.username
-    });
-  });
+  // // when the client emits 'typing', we broadcast it to others
+  // socket.on('typing', () => {
+  //   socket.broadcast.emit('typing', {
+  //     username: socket.username
+  //   });
+  // });
+  //
+  // // when the client emits 'stop typing', we broadcast it to others
+  // socket.on('stop typing', () => {
+  //   socket.broadcast.emit('stop typing', {
+  //     username: socket.username
+  //   });
+  // });
 
   // when the user disconnects.. perform this
-  socket.on('disconnect', () => {
-    if (addedUser) {
-      --numUsers;
+  // socket.on('disconnect', () => {
+  //   if (addedUser) {
+  //     --numUsers;
+  //
+  //     // echo globally that this client has left
+  //     socket.broadcast.emit('user left', {
+  //       username: socket.username,
+  //       numUsers: numUsers
+  //     });
+  //   }
+  // });
 
-      // echo globally that this client has left
-      socket.broadcast.emit('user left', {
-        username: socket.username,
-        numUsers: numUsers
-      });
-    }
-  });
-
-  socket.on('chat message', message => {
-    io.emit('chat message', {
+  socket.on('new message', message => {
+    console.log('new message');
+    io.emit('new message', {
       ...message,
       timestamp: new Date().getTime(),
     });
+  });
+
+  socket.on('disconnect', () => {
+    console.log('disconnect');
+    --numUsers;
+    io.emit('user count', { numUsers })
+    console.log('user count:', numUsers);
   });
 });

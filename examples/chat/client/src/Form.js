@@ -8,15 +8,22 @@ class Form extends Component {
     messages: [],
     socket: openSocket(SERVER_API),
     inputText: '',
+    numUsers: 0,
   };
   subscribeChatMessage = () => {
     const { socket } = this.state;
-    socket.on('chat message', msg => {
+    socket.on('new message', msg => {
       const { messages } = this.state;
       this.setState({
         messages: [...messages, msg],
       });
     });
+    socket.on('user count', ({ numUsers }) => {
+      console.log('user count');
+      this.setState({
+        numUsers,
+      });
+    })
   };
   onChange = e => {
     e.preventDefault();
@@ -26,7 +33,7 @@ class Form extends Component {
     e.preventDefault();
     const { user } = this.props;
     const { socket, inputText } = this.state;
-    socket.emit('chat message', {
+    socket.emit('new message', {
       author: user,
       payload: inputText,
     });
@@ -36,10 +43,11 @@ class Form extends Component {
     this.subscribeChatMessage();
   }
   render() {
-    const { messages, inputText } = this.state;
+    const { messages, inputText, numUsers } = this.state;
     const { onSubmit, onChange } = this;
     return (
       <React.Fragment>
+        <div>Connected Users: {numUsers}</div>
         <ul>
           {messages.map((message, i) => (
             <li key={i}>
