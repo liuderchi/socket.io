@@ -23,7 +23,7 @@ class Form extends Component {
       this.setState({
         numUsers,
       });
-    })
+    });
   };
   onChange = e => {
     e.preventDefault();
