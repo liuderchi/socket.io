@@ -10,6 +10,10 @@
     "express": "4.13.4"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "start:watch": "nodemon index.js"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.4"
   }
 }
