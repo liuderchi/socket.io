@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import openSocket from 'socket.io-client';
+import MessageCard from './MessageCard';
 
 const SERVER_API = 'http://localhost:3000';
-
 class Form extends Component {
   state = {
     messages: [],
@@ -43,21 +43,23 @@ class Form extends Component {
     this.subscribeChatMessage();
   }
   render() {
+    const { user } = this.props;
     const { messages, inputText, numUsers } = this.state;
     const { onSubmit, onChange } = this;
     return (
       <React.Fragment>
         <div>Connected Users: {numUsers}</div>
-        <ul>
-          {messages.map((message, i) => (
-            <li key={i}>
-              {message.payload} {message.author} {Date(message.timestamp)}
-            </li>
-          ))}
-        </ul>
+        {messages.map((message, i) => (
+          <MessageCard
+            key={i}
+            message={message}
+            displayTime={i === messages.length - 1}
+            user={user}
+          />
+        ))}
         <form action={''} onSubmit={onSubmit}>
           <input autoComplete="off" value={inputText} onChange={onChange} />
-          <button>Send</button>
+          <button type="submit" >Send</button>
         </form>
       </React.Fragment>
     );

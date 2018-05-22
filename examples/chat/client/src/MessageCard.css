@@ -1,0 +1,27 @@
+.cardLeft {
+    text-align: left;
+    margin: 10px;
+}
+
+.cardRight {
+    text-align: right;
+    margin: 10px;
+}
+
+.author {
+    color: #0006;
+}
+
+.payload {
+    color: black;
+    background-color: #f1f0f0;
+    border-radius: 5px;
+    padding: 5px;
+    display: inline-block;
+}
+
+.time {
+    color: #0006;
+    padding-top: 10px;
+    text-align: right;
+}
