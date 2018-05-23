@@ -51,7 +51,11 @@ class Form extends Component {
     const { onSubmit, onChange } = this;
     return (
       <React.Fragment>
-        <div>Connected Users: {numUsers}</div>
+        <h3>
+          {numUsers > 1
+            ? `💬 Let's chat with ${numUsers} friends!`
+            : `💬 Let's chat!`}
+        </h3>
         <MessageCardGroup messages={messages} user={user} />
         <form className={'inputForm'} onSubmit={onSubmit}>
           <input autoComplete="off" value={inputText} onChange={onChange} />
