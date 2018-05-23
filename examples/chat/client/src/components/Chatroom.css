@@ -1,20 +1,20 @@
-.inputForm {
+.ChatRoom-form {
     display: flex;
     position: fixed;
     bottom: 0;
     width: 100%;
 }
 
-.inputForm input {
+.ChatRoom-form input {
     width: 100%;
     font-size: 1rem;
 }
 
-.inputForm input:focus{
+.ChatRoom-form input:focus{
     outline: none;
 }
 
-.inputForm button {
+.ChatRoom-form button {
     width: 100px;
     height: 80px;
     font-size: 1rem;

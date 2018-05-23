@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import openSocket from 'socket.io-client';
 import MessageCardGroup from './MessageCardGroup';
-import './Form.css';
+import './ChatRoom.css';
 
 const SERVER_API = 'http://localhost:3000';
-class Form extends Component {
+class ChatRoom extends Component {
   state = {
     messages: [],
     socket: openSocket(SERVER_API),
@@ -57,7 +57,7 @@ class Form extends Component {
             : `💬 Let's chat!`}
         </h3>
         <MessageCardGroup messages={messages} user={user} />
-        <form className={'inputForm'} onSubmit={onSubmit}>
+        <form className={'ChatRoom-form'} onSubmit={onSubmit}>
           <input autoComplete="off" value={inputText} onChange={onChange} />
           <button type="submit">Send</button>
         </form>
@@ -66,8 +66,8 @@ class Form extends Component {
   }
 }
 
-Form.defaultProps = {
+ChatRoom.defaultProps = {
   user: 'derek@example.com',
 };
 
-export default Form;
+export default ChatRoom;

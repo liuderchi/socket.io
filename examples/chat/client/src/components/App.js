@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Form from './Form';
+import ChatRoom from './ChatRoom';
 import logo from '../icons/logo.svg';
 import './App.css';
 
@@ -10,7 +10,7 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
         </header>
-        <Form />
+        <ChatRoom />
       </div>
     );
   }
