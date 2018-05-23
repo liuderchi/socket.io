@@ -13,10 +13,25 @@
   color: white;
 }
 
-.App-title {
-  font-size: 1.5em;
+.App-form {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
-.App-intro {
-  font-size: large;
+.App-form input {
+    width: 100%;
+    font-size: 1rem;
+}
+
+.App-form input:focus{
+    outline: none;
+}
+
+.App-form button {
+    width: 100px;
+    height: 80px;
+    font-size: 1rem;
+    background-color: darkgrey;
 }
