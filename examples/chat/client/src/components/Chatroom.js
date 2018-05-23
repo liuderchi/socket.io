@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import openSocket from 'socket.io-client';
+import Welcome from './Welcome';
 import MessageCardGroup from './MessageCardGroup';
 import './ChatRoom.css';
 
@@ -51,11 +52,7 @@ class ChatRoom extends Component {
     const { onSubmit, onChange } = this;
     return (
       <React.Fragment>
-        <h3>
-          {numUsers > 1
-            ? `💬 Let's chat with ${numUsers} friends!`
-            : `💬 Let's chat!`}
-        </h3>
+        <Welcome numUsers={numUsers} />
         <MessageCardGroup messages={messages} user={user} />
         <form className={'ChatRoom-form'} onSubmit={onSubmit}>
           <input autoComplete="off" value={inputText} onChange={onChange} />
