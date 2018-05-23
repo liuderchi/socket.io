@@ -1,0 +1,22 @@
+.inputForm {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.inputForm input {
+    width: 100%;
+    font-size: 1rem;
+}
+
+.inputForm input:focus{
+    outline: none;
+}
+
+.inputForm button {
+    width: 100px;
+    height: 80px;
+    font-size: 1rem;
+    background-color: darkgrey;
+}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import openSocket from 'socket.io-client';
-import MessageCard from './MessageCard';
+import MessageCardGroup from './MessageCardGroup';
+import './Form.css';
 
 const SERVER_API = 'http://localhost:3000';
 class Form extends Component {
@@ -33,11 +34,13 @@ class Form extends Component {
     e.preventDefault();
     const { user } = this.props;
     const { socket, inputText } = this.state;
+    if (!inputText) return;
     socket.emit('new message', {
       author: user,
       payload: inputText,
     });
     this.setState({ inputText: '' });
+    // TODO scroll bottom
   };
   componentDidMount() {
     this.subscribeChatMessage();
@@ -49,17 +52,10 @@ class Form extends Component {
     return (
       <React.Fragment>
         <div>Connected Users: {numUsers}</div>
-        {messages.map((message, i) => (
-          <MessageCard
-            key={i}
-            message={message}
-            displayTime={i === messages.length - 1}
-            user={user}
-          />
-        ))}
-        <form action={''} onSubmit={onSubmit}>
+        <MessageCardGroup messages={messages} user={user} />
+        <form className={'inputForm'} onSubmit={onSubmit}>
           <input autoComplete="off" value={inputText} onChange={onChange} />
-          <button type="submit" >Send</button>
+          <button type="submit">Send</button>
         </form>
       </React.Fragment>
     );
