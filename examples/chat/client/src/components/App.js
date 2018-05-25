@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import openSocket from 'socket.io-client';
+import Modal from 'react-modal';
 import Welcome from './Welcome';
 import MessageCardGroup from './MessageCardGroup';
 import logo from '../icons/logo.svg';
@@ -9,11 +10,14 @@ const SERVER_API = 'http://localhost:3000';
 
 class App extends Component {
   state = {
+    user: 'Tony Stark',
     messages: [],
     socket: openSocket(SERVER_API),
     inputText: '',
     numUsers: 0,
+    showModal: true,
   };
+  closeModal = () => this.setState({ showModal: false });
   componentDidMount() {
     this.subscribeChatMessage();
   }
@@ -21,10 +25,13 @@ class App extends Component {
     e.preventDefault();
     this.setState({ inputText: e.target.value });
   };
+  onUserChange = e => {
+    e.preventDefault();
+    this.setState({ user: e.target.value });
+  }
   onSubmit = e => {
     e.preventDefault();
-    const { user } = this.props;
-    const { socket, inputText } = this.state;
+    const { user, socket, inputText } = this.state;
     if (!inputText) return;
     socket.emit('new message', {
       author: user,
@@ -49,9 +56,8 @@ class App extends Component {
     });
   };
   render() {
-    const { user } = this.props;
-    const { messages, inputText, numUsers } = this.state;
-    const { onSubmit, onChange } = this;
+    const { user, messages, inputText, numUsers, showModal } = this.state;
+    const { onSubmit, onChange, onUserChange, closeModal } = this;
 
     return (
       <div className="App">
@@ -64,13 +70,17 @@ class App extends Component {
           <input autoComplete="off" value={inputText} onChange={onChange} />
           <button type="submit">Send</button>
         </form>
+        <Modal isOpen={showModal} contentLabel="Enter User Name">
+          <div className="App-Modal">
+            <h3>{`What's your name?`}</h3>
+            <form onSubmit={closeModal}>
+              <input autoComplete="off" value={user} onChange={onUserChange} />
+            </form>
+          </div>
+        </Modal>
       </div>
     );
   }
 }
-
-App.defaultProps = {
-  user: 'derek@example.com',
-};
 
 export default App;
