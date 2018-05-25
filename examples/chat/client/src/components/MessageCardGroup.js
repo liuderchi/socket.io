@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import MessageCard from './MessageCard';
-import './MessageCardGroup.css'
 
 class MessageCardGroup extends Component {
   render() {
     const { messages, user } = this.props;
 
     return (
-      <div className="messageCardGroup">
+      <div className="MessageCardGroup">
       {messages.map((message, i) => (
         <MessageCard
           key={i}

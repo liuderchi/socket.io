@@ -35,3 +35,37 @@
     font-size: 1rem;
     background-color: darkgrey;
 }
+
+.MessageCardGroup {
+    height: 80vh;
+    min-height: 80vh;
+    overflow: scroll;
+}
+
+.MessageCard-cardLeft {
+    text-align: left;
+    margin: 10px;
+}
+
+.MessageCard-cardRight {
+    text-align: right;
+    margin: 10px;
+}
+
+.MessageCard-author {
+    color: #0006;
+}
+
+.MessageCard-payload {
+    color: black;
+    background-color: #f1f0f0;
+    border-radius: 5px;
+    padding: 5px;
+    display: inline-block;
+}
+
+.MessageCard-time {
+    color: #0006;
+    padding-top: 10px;
+    text-align: right;
+}
