@@ -43,13 +43,17 @@
 }
 
 .MessageCard-cardLeft {
-    text-align: left;
-    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
 }
 
 .MessageCard-cardRight {
-    text-align: right;
-    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 10px;
 }
 
 .MessageCard-author {
