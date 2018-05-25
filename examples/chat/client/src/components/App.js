@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import openSocket from 'socket.io-client';
+import CommonDialog from 'mcs-lite-ui/lib/Dialog/CommonDialog';
 import Welcome from './Welcome';
 import MessageCardGroup from './MessageCardGroup';
 import logo from '../icons/logo.svg';
