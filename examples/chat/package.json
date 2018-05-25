@@ -7,11 +7,25 @@
   "private": true,
   "license": "BSD",
   "dependencies": {
-    "express": "4.13.4"
+    "express": "4.13.4",
+    "socket.io": "^2.1.1"
   },
   "scripts": {
     "start": "node index.js",
     "start:watch": "nodemon index.js"
+  },
+  "now": {
+    "name": "chattium-poc",
+    "type": "npm",
+    "engines": {
+      "node": "9"
+    },
+    "now.files": [
+      "client/build",
+      "package-lock.json",
+      "index.js"
+    ],
+    "env": {}
   },
   "devDependencies": {
     "nodemon": "^1.17.4"

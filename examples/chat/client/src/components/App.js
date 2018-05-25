@@ -6,7 +6,7 @@ import MessageCardGroup from './MessageCardGroup';
 import logo from '../icons/logo.svg';
 import './App.css';
 
-const SERVER_API = 'http://localhost:3000';
+const SERVER_API = 'https://derek-chattium.now.sh:3000';
 
 class App extends Component {
   state = {
