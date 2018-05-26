@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
-import openSocket from 'socket.io-client';
+// import openSocket from 'socket.io-client';
+import io from 'socket.io-client'
 import Modal from 'react-modal';
 import Welcome from './Welcome';
 import MessageCardGroup from './MessageCardGroup';
 import logo from '../icons/logo.svg';
 import './App.css';
 
-const SERVER_API = 'https://derek-chattium.now.sh:3000';
+// const SERVER_API = 'http://localhost:3000';
 
 class App extends Component {
   state = {
     user: 'Tony Stark',
     messages: [],
-    socket: openSocket(SERVER_API),
+    socket: io(),
     inputText: '',
     numUsers: 0,
     showModal: true,

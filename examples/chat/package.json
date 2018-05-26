@@ -19,13 +19,7 @@
     "type": "npm",
     "engines": {
       "node": "9"
-    },
-    "now.files": [
-      "client/build",
-      "package-lock.json",
-      "index.js"
-    ],
-    "env": {}
+    }
   },
   "devDependencies": {
     "nodemon": "^1.17.4"
