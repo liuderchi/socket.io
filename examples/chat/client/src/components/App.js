@@ -6,13 +6,14 @@ import MessageCardGroup from './MessageCardGroup';
 import logo from '../icons/logo.svg';
 import './App.css';
 
-const SERVER_API = 'http://localhost:3000';
+const API =
+  process.env.REACT_APP_ENV === 'DEV' ? 'http://localhost:3000' : null;
 
 class App extends Component {
   state = {
     user: 'Tony Stark',
     messages: [],
-    socket: openSocket(SERVER_API),
+    socket: openSocket(API),
     inputText: '',
     numUsers: 0,
     showModal: true,
