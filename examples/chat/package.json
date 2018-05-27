@@ -15,7 +15,7 @@
     "start:watch": "nodemon index.js"
   },
   "now": {
-    "name": "chattium-poc",
+    "name": "chattium",
     "type": "npm",
     "engines": {
       "node": "9"
