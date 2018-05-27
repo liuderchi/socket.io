@@ -3,7 +3,7 @@ import openSocket from 'socket.io-client';
 import Modal from 'react-modal';
 import Welcome from './Welcome';
 import MessageCardGroup from './MessageCardGroup';
-import logo from '../icons/logo.svg';
+import logo from '../icons/logo.png';
 import './App.css';
 
 const API =
