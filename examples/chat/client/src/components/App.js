@@ -29,7 +29,7 @@ class App extends Component {
   onUserChange = e => {
     e.preventDefault();
     this.setState({ user: e.target.value });
-  }
+  };
   onSubmit = e => {
     e.preventDefault();
     const { user, socket, inputText } = this.state;
@@ -39,7 +39,12 @@ class App extends Component {
       payload: inputText,
     });
     this.setState({ inputText: '' });
-    // TODO scroll bottom
+  };
+  setRef = el => (this.msgsDOM = el);
+  scrollBottom = () => {
+    if (this.msgsDOM && this.msgsDOM.root) {
+      this.msgsDOM.root.scrollTop = this.msgsDOM.root.scrollHeight;
+    }
   };
   subscribeChatMessage = () => {
     const { socket } = this.state;
@@ -48,6 +53,7 @@ class App extends Component {
       this.setState({
         messages: [...messages, msg],
       });
+      this.scrollBottom();
     });
     socket.on('user count', ({ numUsers }) => {
       console.log('user count');
@@ -58,7 +64,7 @@ class App extends Component {
   };
   render() {
     const { user, messages, inputText, numUsers, showModal } = this.state;
-    const { onSubmit, onChange, onUserChange, closeModal } = this;
+    const { onSubmit, onChange, onUserChange, closeModal, setRef } = this;
 
     return (
       <div className="App">
@@ -66,7 +72,7 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
         </header>
         <Welcome numUsers={numUsers} />
-        <MessageCardGroup messages={messages} user={user} />
+        <MessageCardGroup ref={setRef} messages={messages} user={user} />
         <form className={'App-form'} onSubmit={onSubmit}>
           <input autoComplete="off" value={inputText} onChange={onChange} />
           <button type="submit">Send</button>
