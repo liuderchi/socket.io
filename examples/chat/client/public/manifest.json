@@ -2,8 +2,8 @@
   "name": "chattium",
   "short_name": "chattium",
   "theme_color": "#00ab6c",
-  "background_color": "#000000",
-  "display": "browser",
+  "background_color": "#ffffff",
+  "display": "standalone",
   "Scope": "/",
   "start_url": "./index.html",
   "icons": [
