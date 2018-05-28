@@ -20,21 +20,29 @@ var numUsers = 0;
 io.on('connection', socket => {
   console.log('connected');
   ++numUsers;
-  io.emit('user count', { numUsers });
+  // io.emit('user count', { numUsers });
+  socket.broadcast.emit('user count', { numUsers });
   console.log('user count:', numUsers);
 
-  socket.on('new message', message => {
+  socket.on('new message', (message, fn) => {
     console.log('new message');
-    io.emit('new message', {
+    const timestamp = new Date().getTime();
+    // io.emit('new message', {
+    socket.broadcast.emit('new message', {
       ...message,
-      timestamp: new Date().getTime(),
+      timestamp,
+    });
+    fn({
+      ...message,
+      timestamp,
     });
   });
 
   socket.on('disconnect', () => {
     console.log('disconnect');
     --numUsers;
-    io.emit('user count', { numUsers });
+    // io.emit('user count', { numUsers });
+    socket.broadcast.emit('user count', { numUsers });
     console.log('user count:', numUsers);
   });
 });

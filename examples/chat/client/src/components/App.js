@@ -37,8 +37,14 @@ class App extends Component {
     socket.emit('new message', {
       author: user,
       payload: inputText,
+    }, ack => {
+      console.log({ ack });
+      this.setState({
+        messages: [...this.state.messages, ack],
+        inputText: '',
+      });
     });
-    this.setState({ inputText: '' });
+    // this.setState({ inputText: '' });
   };
   setRef = el => (this.msgsDOM = el);
   scrollBottom = () => {
