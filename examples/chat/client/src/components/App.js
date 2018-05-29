@@ -11,14 +11,18 @@ const API =
 
 class App extends Component {
   state = {
-    user: 'Tony Stark',
+    user: '',
     messages: [],
     socket: openSocket(API),
     inputText: '',
     numUsers: 0,
     showModal: true,
   };
-  closeModal = () => this.setState({ showModal: false });
+  closeModal = e => {
+    e.preventDefault();
+    if (!this.state.user) return;
+    this.setState({ showModal: false })
+  };
   componentDidMount() {
     this.subscribeChatMessage();
   }
@@ -81,7 +85,12 @@ class App extends Component {
           <div className="App-Modal">
             <h3>{`What's your name?`}</h3>
             <form onSubmit={closeModal}>
-              <input autoComplete="off" value={user} onChange={onUserChange} />
+              <input
+                autoComplete="off"
+                value={user}
+                onChange={onUserChange}
+                placeholder="Tony Stark"
+              />
             </form>
           </div>
         </Modal>
