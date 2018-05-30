@@ -1,11 +1,11 @@
 {
-  "name": "socket.io-chat",
+  "name": "chattium",
   "version": "0.0.0",
-  "description": "A simple chat client using socket.io",
+  "description": "A simple chat app built for learning react and socket.io",
   "main": "index.js",
-  "author": "Grant Timmerman",
+  "author": "Te-Chi Liu",
   "private": true,
-  "license": "BSD",
+  "license": "MIT",
   "dependencies": {
     "express": "4.13.4",
     "socket.io": "^2.1.1"
