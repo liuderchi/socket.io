@@ -6,14 +6,18 @@ import MessageCardGroup from './MessageCardGroup';
 import logo from '../icons/logo.png';
 import './App.css';
 
-const API =
+const WS_API =
   process.env.REACT_APP_ENV === 'DEV' ? 'http://localhost:3000' : null;
+const REST_API =
+  process.env.REACT_APP_ENV === 'DEV'
+    ? 'http://localhost:3000'
+    : `${window.location.origin}:443`;
 
 class App extends Component {
   state = {
     user: '',
     messages: [],
-    socket: openSocket(API),
+    socket: openSocket(WS_API),
     inputText: '',
     numUsers: 0,
     showModal: true,
@@ -21,10 +25,13 @@ class App extends Component {
   closeModal = e => {
     e.preventDefault();
     if (!this.state.user) return;
-    this.setState({ showModal: false })
+    this.setState({ showModal: false });
   };
   componentDidMount() {
     this.subscribeChatMessage();
+    fetch(`${REST_API}/messages`)
+      .then(res => res.json())
+      .then(messages => this.setState({ messages }));
   }
   onChange = e => {
     e.preventDefault();
