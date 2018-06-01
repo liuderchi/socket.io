@@ -1,4 +1,8 @@
 .App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  /* overflow: hidden; */
   text-align: center;
 }
 
@@ -7,16 +11,17 @@
 }
 
 .App-header {
+  flex: 1 0;
   background-color: #00ab6c;
-  height: 40px;
-  padding: 5px;
+  min-height: 40px;
+  padding: 10px;
   color: white;
 }
 
 .App-form {
+    flex: 1 0;
+    min-height: 60px;
     display: flex;
-    position: fixed;
-    bottom: 0;
     width: 100%;
 }
 
@@ -31,15 +36,14 @@
 
 .App-form button {
     width: 100px;
-    height: 80px;
+    height: 100%;
     font-size: 1rem;
     background-color: darkgrey;
 }
 
 .MessageCardGroup {
-    height: 80vh;
-    min-height: 80vh;
-    overflow: scroll;
+    flex: 2 0 80%;
+    overflow-y: auto;
 }
 
 .MessageCard-cardLeft {
