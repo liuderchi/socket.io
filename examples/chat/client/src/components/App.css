@@ -11,15 +11,19 @@
 }
 
 .App-header {
-  flex: 1 0;
+  flex: 1 1;
   background-color: #00ab6c;
   min-height: 40px;
   padding: 10px;
   color: white;
 }
 
+.App-welcome {
+  padding: 5px 0;
+}
+
 .App-form {
-    flex: 1 0;
+    flex: 1 1;
     min-height: 60px;
     display: flex;
     width: 100%;
@@ -42,7 +46,7 @@
 }
 
 .MessageCardGroup {
-    flex: 2 0 80%;
+    flex: 2 1 80%;
     overflow-y: auto;
 }
 

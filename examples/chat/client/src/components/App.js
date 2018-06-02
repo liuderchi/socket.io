@@ -82,7 +82,7 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
         </header>
-        <Welcome numUsers={numUsers} />
+        <Welcome className="App-welcome" numUsers={numUsers} />
         <MessageCardGroup ref={setRef} messages={messages} user={user} />
         <form className={'App-form'} onSubmit={onSubmit}>
           <input autoComplete="off" value={inputText} onChange={onChange} />
