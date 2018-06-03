@@ -7,6 +7,10 @@ const io = require('socket.io')(server);
 
 const port = process.env.PORT || 3000;
 const MESSAGES_LIMIT = 100;
+const CONNECTION = 'connection';
+const DISCONNECT = 'disconnect';
+const NEW_MESSAGE = 'new message';
+const USER_COUNT = 'user count';
 const messages = [];
 let numUsers = 0;
 
@@ -21,26 +25,26 @@ server.listen(port, () => {
   console.log('Server listening at port %d', port);
 });
 
-io.on('connection', socket => {
+io.on(CONNECTION, socket => {
   console.log('connected');
   ++numUsers;
-  io.emit('user count', { numUsers });
+  io.emit(USER_COUNT, { numUsers });
   console.log('user count:', numUsers);
 
-  socket.on('new message', message => {
-    console.log('new message');
+  socket.on(NEW_MESSAGE, message => {
+    console.log(`${NEW_MESSAGE}: ${JSON.stringify(message)}`);
     const timestamp = new Date().getTime();
 
     messages.push({ ...message, timestamp });
     if (messages.length > MESSAGES_LIMIT) messages.shift();
 
-    io.emit('new message', { ...message, timestamp });
+    io.emit(NEW_MESSAGE, { ...message, timestamp });
   });
 
-  socket.on('disconnect', () => {
+  socket.on(DISCONNECT, () => {
     console.log('disconnect');
     --numUsers;
-    io.emit('user count', { numUsers });
+    io.emit(USER_COUNT, { numUsers });
     console.log('user count:', numUsers);
   });
 });

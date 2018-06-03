@@ -12,6 +12,8 @@ const REST_API =
   process.env.REACT_APP_ENV === 'DEV'
     ? 'http://localhost:3000'
     : `${window.location.origin}:443`;
+const NEW_MESSAGE = 'new message';
+const USER_COUNT = 'user count';
 
 class App extends Component {
   state = {
@@ -45,7 +47,7 @@ class App extends Component {
     e.preventDefault();
     const { user, socket, inputText } = this.state;
     if (!inputText) return;
-    socket.emit('new message', {
+    socket.emit(NEW_MESSAGE, {
       author: user,
       payload: inputText,
     });
@@ -59,15 +61,14 @@ class App extends Component {
   };
   subscribeChatMessage = () => {
     const { socket } = this.state;
-    socket.on('new message', msg => {
+    socket.on(NEW_MESSAGE, msg => {
       const { messages } = this.state;
       this.setState({
         messages: [...messages, msg],
       });
       this.scrollBottom();
     });
-    socket.on('user count', ({ numUsers }) => {
-      console.log('user count');
+    socket.on(USER_COUNT, ({ numUsers }) => {
       this.setState({
         numUsers,
       });
@@ -84,7 +85,7 @@ class App extends Component {
         </header>
         <Welcome className="App-welcome" numUsers={numUsers} />
         <MessageCardGroup ref={setRef} messages={messages} user={user} />
-        <form className={'App-form'} onSubmit={onSubmit}>
+        <form className="App-form" onSubmit={onSubmit}>
           <input autoComplete="off" value={inputText} onChange={onChange} />
           <button type="submit">Send</button>
         </form>
