@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import openSocket from 'socket.io-client';
 import Modal from 'react-modal';
+import Cookies from 'js-cookie';
 import Welcome from './Welcome';
 import MessageCardGroup from './MessageCardGroup';
 import logo from '../icons/logo.png';
@@ -17,7 +18,7 @@ const USER_COUNT = 'user count';
 
 class App extends Component {
   state = {
-    user: '',
+    user: Cookies.get('user') || '',
     messages: [],
     socket: openSocket(WS_API),
     inputText: '',
@@ -41,6 +42,7 @@ class App extends Component {
   };
   onUserChange = e => {
     e.preventDefault();
+    Cookies.set('user', e.target.value); 
     this.setState({ user: e.target.value });
   };
   onSubmit = e => {
