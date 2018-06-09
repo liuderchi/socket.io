@@ -1,10 +1,13 @@
 FROM ubuntu:16.04
 LABEL maintainer="TE-CHI LIU"
 
-RUN apt-get update && apt-get install -y wget
-RUN ["/bin/bash", "-c", "set -o pipefail && wget -O - https://deb.nodesource.com/setup_10.x | bash -"]
-RUN apt-get install -y \
+RUN apt-get update && apt-get install -y curl
+RUN ["/bin/bash", "-c", "set -o pipefail && curl -sSL https://deb.nodesource.com/setup_10.x | bash -"]
+RUN ["/bin/bash", "-c", "set -o pipefail && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -"]
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN apt-get update && apt-get install -y \
     nodejs \
+    yarn \
     openssh-server
 RUN mkdir /var/run/sshd
 RUN echo 'root:root' | chpasswd
