@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "dotenv-cli": "^1.4.0",
     "js-cookie": "^2.2.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
@@ -11,7 +12,7 @@
     "socket.io-client": "^2.1.1"
   },
   "scripts": {
-    "start": "PORT=3001 REACT_APP_ENV=DEV react-scripts start",
+    "start": "dotenv -e .dev.env react-scripts start",
     "build": "react-scripts build && sw-precache --config=sw-precache-config.js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

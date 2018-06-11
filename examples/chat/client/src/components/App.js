@@ -8,10 +8,10 @@ import logo from '../icons/logo.png';
 import './App.css';
 
 const WS_API =
-  process.env.REACT_APP_ENV === 'DEV' ? 'http://localhost:3000' : null;
+  process.env.NODE_ENV === 'development' ? process.env.REACT_APP_WS_API : null;
 const REST_API =
-  process.env.REACT_APP_ENV === 'DEV'
-    ? 'http://localhost:3000'
+  process.env.NODE_ENV === 'development'
+    ? process.env.REACT_APP_REST_API
     : `${window.location.origin}:443`;
 const NEW_MESSAGE = 'new message';
 const USER_COUNT = 'user count';
@@ -42,7 +42,7 @@ class App extends Component {
   };
   onUserChange = e => {
     e.preventDefault();
-    Cookies.set('user', e.target.value); 
+    Cookies.set('user', e.target.value);
     this.setState({ user: e.target.value });
   };
   onSubmit = e => {

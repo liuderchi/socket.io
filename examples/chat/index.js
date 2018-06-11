@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 // Setup basic express server
 const express = require('express');
 const app = express();
@@ -5,7 +7,7 @@ const path = require('path');
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 const MESSAGES_LIMIT = 100;
 const CONNECTION = 'connection';
 const DISCONNECT = 'disconnect';
